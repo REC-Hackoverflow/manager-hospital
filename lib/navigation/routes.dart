@@ -9,7 +9,7 @@ import '../screens/settings_screen.dart';
 import '../pages/pages_routes.dart';
 import '../widgets/list_sub_services.dart';
 import '../screens/screens_routes.dart';
-
+import '../pages/auth_screen/login_page.dart';
 var routes = <String, WidgetBuilder>{
   '/': (_) => HomeScreen(),
   AnalyticsPage.pageRoute: (_) => AnalyticsPage(),
