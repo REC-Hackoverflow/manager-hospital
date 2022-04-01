@@ -5,6 +5,8 @@ import '../pages/pages_routes.dart';
 import '../screens/screens_routes.dart';
 import '../pages/auth_screen/register_page.dart';
 
+import '../pages/auth_screen/login_page.dart';
+
 var routes = <String, WidgetBuilder>{
   '/': (_) => HomeScreen(),
   AnalyticsPage.pageRoute: (_) => AnalyticsPage(),
