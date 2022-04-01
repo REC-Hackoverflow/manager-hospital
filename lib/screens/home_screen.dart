@@ -3,10 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../pages/home_screen/add_services_page.dart';
-import '../pages/home_screen/analytics_page.dart';
-import '../pages/home_screen/current_services_page.dart';
-import '../pages/home_screen/edit_services_page.dart';
+import '../pages/pages_routes.dart';
 import '../themes.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/navbar.dart';

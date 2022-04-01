@@ -1,14 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../themes.dart';
 
 class AddPicturesPage extends StatelessWidget {
   AddPicturesPage({Key? key}) : super(key: key);
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Map;
+    final email = args["email"];
+    final password = args["password"];
+    final name = args["name"];
+    final address = args["address"];
+    final geo_location = args["geo_location"];
+    final hospitals = firestore.collection('hospitals');
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -17,31 +27,41 @@ class AddPicturesPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(60, 100, 60, 50),
-              child: const Text(
-                "Add photos of hospital",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textLightMode),
-              ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 21),
+            //   child: const Text(
+            //     "All details have been ",
+            //     textAlign: TextAlign.center,
+            //     style: TextStyle(
+            //         fontSize: 36,
+            //         fontWeight: FontWeight.bold,
+            //         color: AppColors.textLightMode),
+            //   ),
+            // ),
+            Icon(
+              Icons.check_circle_outline,
+              color: Colors.green,
+              size: 69,
             ),
-
+            SizedBox(
+              height: 21,
+            ),
             GestureDetector(
               onTap: () async {
                 try {
                   UserCredential userCredential = await FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
-                          email: "barry.allen@example.com",
-                          password: "SuperSecretPassword!");
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'weak-password') {
-                    print('The password provided is too weak.');
-                  } else if (e.code == 'email-already-in-use') {
-                    print('The account already exists for that email.');
-                  }
+                          email: email, password: password);
+                  hospitals.add({
+                    "address": address,
+                    "current_services": [],
+                    "email": email,
+                    "hospital_picture_url": [],
+                    "latitude": geo_location.latitude.toString(),
+                    "longitude": geo_location.longitude.toString(),
+                    "services": [],
+                    "services_categories": []
+                  });
                 } catch (e) {
                   print(e);
                 }
